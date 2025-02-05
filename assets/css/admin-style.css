@@ -1,0 +1,39 @@
+.custom-field {
+    margin-bottom: 10px;
+    padding: 10px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.custom-field input[type="text"] {
+    width: 200px;
+}
+
+.custom-field select {
+    margin: 0 10px;
+}
+
+.custom-field label {
+    margin: 0 10px;
+}
+
+.nav-tab-wrapper {
+    margin-bottom: 20px;
+}
+
+.tab-content {
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+
+#add-field {
+    margin-top: 10px;
+}
+
+.remove-field {
+    color: #a00;
+    cursor: pointer;
+}
