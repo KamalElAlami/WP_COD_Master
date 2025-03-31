@@ -102,4 +102,46 @@ if (!defined('ABSPATH')) {
         <th>Button Text Size (px)</th>
         <td><input type="number" name="cod_form_button_font_size" value="<?php echo esc_attr(get_option('cod_form_button_font_size', '16')); ?>" min="12" max="24"></td>
     </tr>
+    <!-- Add this to your existing style settings -->
+    <tr>
+        <th colspan="2">
+            <h4 style="margin: 15px 0 0;">Form Border</h4>
+        </th>
+    </tr>
+    <tr>
+        <th>Form Border Color</th>
+        <td><input type="color" name="cod_form_form_border_color" value="<?php echo esc_attr(get_option('cod_form_form_border_color', '#dddddd')); ?>"></td>
+    </tr>
+    <tr>
+        <th>Form Border Width (px)</th>
+        <td><input type="number" name="cod_form_form_border_width" value="<?php echo esc_attr(get_option('cod_form_form_border_width', '1')); ?>" min="0" max="10"></td>
+    </tr>
+
+    <tr>
+        <th colspan="2">
+            <h4 style="margin: 15px 0 0;">Button Effects</h4>
+        </th>
+    </tr>
+    <tr>
+        <th>Button Animation</th>
+        <td>
+            <select name="cod_form_button_animation">
+                <option value="none" <?php selected(get_option('cod_form_button_animation', 'none'), 'none'); ?>>None</option>
+                <option value="shake" <?php selected(get_option('cod_form_button_animation', 'none'), 'shake'); ?>>Shake</option>
+                <option value="pulse" <?php selected(get_option('cod_form_button_animation', 'none'), 'pulse'); ?>>Pulse</option>
+                <option value="glow" <?php selected(get_option('cod_form_button_animation', 'none'), 'glow'); ?>>Glow</option>
+            </select>
+        </td>
+    </tr>
+
+    <tr>
+        <th>Quantity Controls</th>
+        <td>
+            <input type="checkbox" 
+                name="cod_form_quantity_controls_enabled"
+                value="1"
+                <?php checked(get_option('cod_form_quantity_controls_enabled', '0'), '1'); ?>>
+            Enable +/- quantity controls
+        </td>
+    </tr>
 </table>

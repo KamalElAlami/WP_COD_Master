@@ -101,23 +101,80 @@ if (empty($custom_fields) || !is_array($custom_fields)) {
             </div>
         <?php endforeach; ?>
         
-        <div class="form-row">
-            <label for="cod_quantity">Quantity *</label>
-            <input type="number" name="cod_quantity" id="cod_quantity" min="1" value="1" required>
-        </div>
+        <?php if (get_option('cod_form_quantity_controls_enabled', '0') === '1'): ?>
+            <div class="form-row">
+                <label for="cod_quantity">Quantity *</label>
+                <div class="quantity-control">
+                    <button type="button" class="quantity-btn minus">-</button>
+                    <input type="number" name="cod_quantity" id="cod_quantity" class="quantity-input" min="1" value="1" required>
+                    <button type="button" class="quantity-btn plus">+</button>
+                </div>
+            </div>
+        <?php else: ?>
+            <div class="form-row">
+                <label for="cod_quantity">Quantity *</label>
+                <input type="number" name="cod_quantity" id="cod_quantity" min="1" value="1" required>
+            </div>
+        <?php endif; ?>
         
         <button type="submit" class="cod-submit-btn">Order Now - Cash on Delivery</button>
     </form>
 </div>
 
 <style>
-    .cod-form-wrapper {
+      /* Form border (new) */
+      .cod-form-wrapper {
         background-color: <?php echo esc_attr(get_option('cod_form_bg_color', '#ffffff')); ?>;
         border: <?php echo esc_attr(get_option('cod_form_border_width', '1')); ?>px 
                 <?php echo esc_attr(get_option('cod_form_border_style', 'solid')); ?> 
                 <?php echo esc_attr(get_option('cod_form_border_color', '#dddddd')); ?>;
         border-radius: <?php echo esc_attr(get_option('cod_form_border_radius', '4')); ?>px;
         padding: <?php echo esc_attr(get_option('cod_form_padding', '20')); ?>px;
+    }
+    
+    /* Button animations */
+    @keyframes shake {
+        0% { transform: translateX(0); }
+        25% { transform: translateX(-5px); }
+        50% { transform: translateX(5px); }
+        75% { transform: translateX(-5px); }
+        100% { transform: translateX(0); }
+    }
+    
+    <?php if (get_option('cod_form_button_animation') === 'shake'): ?>
+    .cod-submit-btn:hover {
+        animation: shake 0.5s ease-in-out;
+    }
+    <?php endif; ?>
+    
+    /* Quantity controls styling */
+    .quantity-control {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+    
+    .quantity-btn {
+        width: 40px;
+        height: 40px;
+        background: #f5f5f5;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        cursor: pointer;
+    }
+    
+    .quantity-input {
+        width: 60px;
+        text-align: center;
+        margin: 0 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        height: 40px;
     }
     
     .form-row {
@@ -189,9 +246,25 @@ if (empty($custom_fields) || !is_array($custom_fields)) {
 </style>
 
 <?php if ($product->get_type() == 'variable'): ?>
-<script>
+    <script>
 jQuery(document).ready(function($) {
-
+    // Quantity buttons functionality
+    $('.quantity-btn.plus').click(function() {
+        var $input = $(this).siblings('.quantity-input');
+        var currentVal = parseInt($input.val());
+        $input.val(currentVal + 1).trigger('change');
+    });
+    
+    $('.quantity-btn.minus').click(function() {
+        var $input = $(this).siblings('.quantity-input');
+        var currentVal = parseInt($input.val());
+        if (currentVal > 1) {
+            $input.val(currentVal - 1).trigger('change');
+        }
+    });
+    
+    <?php if ($product->get_type() == 'variable'): ?>
+    // Variation handling
     $('.variations-select select').on('change', function() {
         var selectedValues = {};
         var allSelected = true;
@@ -205,8 +278,10 @@ jQuery(document).ready(function($) {
         });
         
         if (allSelected) {
+            // Any additional code for when all variations are selected
         }
     });
+    <?php endif; ?>
 });
 </script>
 <?php endif; ?>

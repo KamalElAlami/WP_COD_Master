@@ -28,6 +28,11 @@ function scf_init() {
 }
 add_action('plugins_loaded', 'scf_init');
 
+function scf_get_form_templates() {
+    $settings = new COD_Form_Settings();
+    return $settings->get_form_templates();
+}
+
 // Enqueue admin scripts and styles
 function scf_admin_enqueue_scripts() {
     wp_enqueue_style('scf-admin-style', SCF_PLUGIN_URL . 'assets/css/admin-style.css', array(), SCF_VERSION);

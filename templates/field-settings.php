@@ -37,7 +37,7 @@ if (empty($custom_fields) || !is_array($custom_fields)) {
         $field = wp_parse_args($field, array(
             'label' => '',
             'type' => 'text',
-            'required' => false,
+            'required' => true,
             'enabled' => true
         ));
     ?>
@@ -120,31 +120,37 @@ jQuery(document).ready(function($) {
     $('#add-field').on('click', function() {
         var index = $('.custom-field').length;
         var newField = `
-            <div class="custom-field">
-                <input type="text" 
-                       name="cod_form_custom_fields[${index}][label]" 
-                       placeholder="Field Label">
-                       
-                <select name="cod_form_custom_fields[${index}][type]">
-                    <option value="text">Text</option>
-                    <option value="tel">Phone</option>
-                    <option value="email">Email</option>
-                    <option value="textarea">Textarea</option>
-                </select>
+                <div class="custom-field">
+                    <input type="text" 
+                        name="cod_form_custom_fields[<?php echo $index; ?>][label]" 
+                        value="<?php echo esc_attr($field['label']); ?>" 
+                        placeholder="Field Label">
                 
-                <label>
-                    <input type="checkbox" 
-                           name="cod_form_custom_fields[${index}][required]"> Required
-                </label>
-                
-                <label>
-                    <input type="checkbox" 
-                           name="cod_form_custom_fields[${index}][enabled]" 
-                           checked> Enabled
-                </label>
-                
-                <button type="button" class="remove-field">Remove</button>
-            </div>
+                    <select name="cod_form_custom_fields[<?php echo $index; ?>][type]">
+                        <option value="text" <?php selected($field['type'], 'text'); ?>>Text</option>
+                        <option value="tel" <?php selected($field['type'], 'tel'); ?>>Phone</option>
+                        <option value="email" <?php selected($field['type'], 'email'); ?>>Email</option>
+                        <option value="textarea" <?php selected($field['type'], 'textarea'); ?>>Textarea</option>
+                    </select>
+                    
+                    <label>
+                        <input type="checkbox" 
+                            name="cod_form_custom_fields[<?php echo $index; ?>][required]"
+                            <?php checked($field['required'], true); ?>> Required
+                    </label>
+                    
+                    <label>
+                        <input type="checkbox" 
+                            name="cod_form_custom_fields[<?php echo $index; ?>][enabled]"
+                            value="1"
+                            <?php checked($field['enabled'], true); ?>> Enabled
+                    </label>
+                    
+                    <button type="button" class="remove-field">Remove</button>
+                    
+                    <!-- Add this hidden field to ensure disabled fields are still submitted -->
+                    <input type="hidden" name="cod_form_custom_fields[<?php echo $index; ?>][field_exists]" value="1">
+        </div>
         `;
         $('#custom-fields').append(newField);
     });
