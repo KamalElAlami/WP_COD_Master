@@ -1,0 +1,289 @@
+/**
+ * Flexible COD Form - Frontend Styles
+ */
+
+ .fcod-form-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    font-family: inherit;
+}
+
+/* Form title */
+.fcod-form-title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+    line-height: 1.4;
+}
+
+/* Product info section */
+.fcod-product-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+}
+
+.fcod-product-image-container {
+    width: 100px;
+    margin-left: 15px;
+    flex-shrink: 0;
+}
+
+.fcod-product-image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.fcod-product-details {
+    flex: 1;
+}
+
+.fcod-product-title {
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-size: 18px;
+    line-height: 1.4;
+}
+
+.fcod-product-rating {
+    margin-bottom: 8px;
+    line-height: 1;
+}
+
+.fcod-star {
+    color: #FFD700;
+    font-size: 18px;
+    display: inline-block;
+}
+
+.fcod-rating-count {
+    color: #777;
+    font-size: 14px;
+    margin-right: 5px;
+}
+
+.fcod-product-price {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* Form rows */
+.fcod-form-row {
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    position: relative;
+}
+
+.fcod-form-row label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Input wrappers */
+.fcod-input-wrapper {
+    position: relative;
+}
+
+.fcod-input-wrapper.has-icon input,
+.fcod-input-wrapper.has-icon textarea {
+    padding-right: 40px;
+}
+
+.fcod-input-icon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #aaa;
+}
+
+/* Form inputs */
+.fcod-form input[type="text"],
+.fcod-form input[type="tel"],
+.fcod-form input[type="email"],
+.fcod-form input[type="number"],
+.fcod-form textarea,
+.fcod-form select {
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    font-family: inherit;
+}
+
+.fcod-form textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+/* Quantity controls */
+.fcod-quantity-control {
+    display: flex;
+    align-items: center;
+}
+
+.fcod-quantity-btn {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    user-select: none;
+}
+
+.fcod-quantity-input {
+    text-align: center;
+}
+
+/* Submit button */
+.fcod-submit-btn {
+    cursor: pointer;
+    width: 100%;
+    font-weight: bold;
+    transition: opacity 0.3s, transform 0.3s;
+    font-family: inherit;
+}
+
+.fcod-submit-btn:hover {
+    opacity: 0.9;
+}
+
+.fcod-submit-btn:active {
+    transform: translateY(1px);
+}
+
+/* Variations */
+.fcod-variations {
+    margin-bottom: 20px;
+}
+
+.fcod-variations select {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+/* Error state */
+.fcod-error {
+    border-color: #dc3232 !important;
+}
+
+.fcod-error-message {
+    color: #dc3232;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+/* Loading spinner */
+.fcod-loading-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: fcod-spin 1s ease-in-out infinite;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+@keyframes fcod-spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Button animations */
+@keyframes fcod-shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+
+@keyframes fcod-pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes fcod-glow {
+    0% { box-shadow: 0 0 5px rgba(0,0,0,0.3); }
+    50% { box-shadow: 0 0 20px rgba(0,0,0,0.6); }
+    100% { box-shadow: 0 0 5px rgba(0,0,0,0.3); }
+}
+
+/* RTL support for Arabic */
+.fcod-form-wrapper {
+    direction: rtl;
+}
+
+.fcod-form input,
+.fcod-form textarea,
+.fcod-form select,
+.fcod-form label {
+    text-align: right;
+}
+
+/* For when form inputs need to be LTR (like phone numbers) */
+.fcod-form input[type="tel"],
+.fcod-form input[type="number"],
+.fcod-form input[type="email"] {
+    direction: ltr;
+    text-align: right;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .fcod-product-info {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .fcod-product-image-container {
+        margin: 0 auto 15px;
+    }
+    
+    /* Make form rows that are half/third width stack on mobile */
+    .fcod-form-row[style*="width: 48%"],
+    .fcod-form-row[style*="width: 31%"] {
+        width: 100% !important;
+    }
+}
+
+/* Improved RTL support for forms */
+.fcod-form-wrapper {
+    direction: rtl;
+    text-align: right;
+}
+
+.fcod-form input,
+.fcod-form textarea,
+.fcod-form select {
+    text-align: right;
+    padding-right: 40px !important;
+    padding-left: 15px !important;
+}
+
+.fcod-input-wrapper.has-icon .fcod-input-icon {
+    right: 12px !important;
+    left: auto !important;
+}
+
+/* For LTR inputs like phone numbers */
+.fcod-form input[type="tel"],
+.fcod-form input[type="number"],
+.fcod-form input[type="email"] {
+    direction: ltr;
+    text-align: right;
+}
+
+/* Fix for form validation messages */
+.fcod-error-message {
+    text-align: right;
+    right: 0;
+    left: auto;
+}
