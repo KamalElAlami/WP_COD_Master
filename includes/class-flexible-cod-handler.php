@@ -65,7 +65,7 @@ class Flexible_COD_Handler {
         }
         
         // Get template settings
-        $settings = new Flexible_COD_Settings();
+        $settings = Flexible_COD_Settings::get_instance(); // Use get_instance() instead of new
         $templates = $settings->get_form_templates();
         $template_data = isset($templates[$template]) ? $templates[$template] : $templates['default'];
         

@@ -20,10 +20,10 @@ require_once FCOD_PLUGIN_DIR . 'includes/class-flexible-cod-settings.php';
 require_once FCOD_PLUGIN_DIR . 'includes/class-flexible-cod-handler.php';
 require_once FCOD_PLUGIN_DIR . 'includes/class-telegram-notification.php';
 
-// Initialize the plugin
+
 // Initialize the plugin
 function fcod_init() {
-    new Flexible_COD_Settings();
+    Flexible_COD_Settings::get_instance();
     new Flexible_COD_Handler();
     new Telegram_Notification();
 }
@@ -59,7 +59,7 @@ function fcod_register_block() {
     );
     
     // Add data for the block editor
-    $settings = new Flexible_COD_Settings();
+    $settings = Flexible_COD_Settings::get_instance(); // Use get_instance() instead of new
     $templates = $settings->get_form_templates();
     $templates_data = array();
     
