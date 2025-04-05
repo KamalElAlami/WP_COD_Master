@@ -165,7 +165,7 @@ function fcod_ajax_apply_template() {
     }
     
     // Get available templates
-    $settings = new Flexible_COD_Settings();
+    $settings = Flexible_COD_Settings::get_instance();
     $templates = $settings->get_form_templates();
     
     // Check if template exists
